@@ -36,7 +36,7 @@ const LoginPage = () => {
 
         // Redirect berdasarkan role
         if (response.data.role === 'ADMIN') {
-          setTimeout(() => router.replace('/karyawan/Customer'), 1000)
+          setTimeout(() => router.replace('/karyawan/pesawat'), 1000)
         } else {
           setTimeout(() => router.replace('/pelanggan/Jadwal'), 1000)
         }
