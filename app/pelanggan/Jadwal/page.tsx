@@ -11,7 +11,7 @@ interface props {
     }
 }
 
-const getAllTrain = async (): Promise<{    uuid: string;
+const getAllAirplane = async (departured_location: string, arrived_location: string): Promise<{    uuid: string;
     flightNumber: string;
     airline: string;
     origin: string;
@@ -27,8 +27,10 @@ const getAllTrain = async (): Promise<{    uuid: string;
   }[]> => {
         try {
             const token = await getServerCookie('token')
+            
 
-            const response: any = await axiosInstance.get('/flight', {
+            const response: any = await axiosInstance.get(`/flight?origin${departured_location? departured_location
+                : ''}&destination=${arrived_location ? arrived_location : ''}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
@@ -46,7 +48,7 @@ const getAllTrain = async (): Promise<{    uuid: string;
  const keretaPage = async (myprops: props) => {
     const departured_location = await myprops.searchParams!.departured_location
     const arrived_location = await myprops.searchParams!.arrived_location
-    const dataKereta = await getAllTrain() || [];
+    const dataKereta = await getAllAirplane(departured_location, arrived_location) || [];
 
     console.log(dataKereta);
 
