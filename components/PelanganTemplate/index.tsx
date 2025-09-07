@@ -71,7 +71,7 @@ const PelangganTemplate = (myprops: props) => {
             <Link href={`/pelanggan/Jadwal`} className="w-full rounded-md text-white p-3 font-semibold  hover:bg-blue-500">
              Data Jadwal
             </Link>
-            <Link href={`/pelanggan/history`} className="w-full rounded-md text-white p-3 font-semibold  hover:bg-blue-500">
+            <Link href={`/pelanggan/History`} className="w-full rounded-md text-white p-3 font-semibold  hover:bg-blue-500">
              Data History
             </Link>
         </div>
