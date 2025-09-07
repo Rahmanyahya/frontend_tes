@@ -1,0 +1,44 @@
+{
+  "name": "tiket-kereta-api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack -p 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cookie": "^1.0.2",
+    "dotenv": "^16.4.7",
+    "formik": "^2.4.6",
+    "js-cookie": "^3.0.5",
+    "lucide-react": "^0.475.0",
+    "next": "15.1.5",
+    "react": "^19.0.0",
+    "react-datepicker": "^8.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.4.0",
+    "react-toastify": "^11.0.3",
+    "yup": "^1.7.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/axios": "^0.9.36",
+    "@types/cookie": "^0.6.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-datepicker": "^6.2.0",
+    "@types/react-dom": "^19",
+    "@types/react-toastify": "^4.0.2",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.5",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
