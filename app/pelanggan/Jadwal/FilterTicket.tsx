@@ -17,8 +17,8 @@ const FilterTicket = (myprops: props) => {
     const handleSearch = () => {
         if (departured_location !== "" && arrived_location !== "") {
             const params = new URLSearchParams(searchParams);
-            params.set('departured_location', departured_location);
-            params.set('arrived_location', arrived_location);
+            params.set('origin', departured_location);
+            params.set('arrived', arrived_location);
             router.push(`/pelanggan/Jadwal?${params.toString()}`);
         }
     }
@@ -31,7 +31,7 @@ const FilterTicket = (myprops: props) => {
     return (
       <div className="py-5 w-full flex flex-wrap items-center">
         <div className="w-full md:w-1/2 p-3">
-          <strong className="font-semibold text-white">Stasiun Asal</strong>
+          <strong className="font-semibold text-white">Bandara Asal</strong>
           <br />
           <input
             type="text"
@@ -41,7 +41,7 @@ const FilterTicket = (myprops: props) => {
           />
         </div>
         <div className="w-full md:w-1/2 p-3">
-          <strong className="font-semibold text-white">Stasiun Tujuan</strong>
+          <strong className="font-semibold text-white">Bandara Tujuan</strong>
           <br />
           <input
             type="text"

@@ -1,9 +1,7 @@
-import React from 'react'
-import FilterTicket from './FilterTicket'
-import { ScheduleTypes } from '@/app/karyawan/types'
-import { axiosInstance } from '@/helper/api'
-import { getServerCookie } from '@/helper/server.cookie'
-import Schedule from './Schedule'
+import { getServerCookie } from "@/helper/server.cookie";
+import { axiosInstance } from "@/helper/api";
+import FlightData from "./Flight";
+import FilterTicket from "./FilterTicket";
 export const dynamic = "force-dynamic";
 
 interface props {
@@ -13,68 +11,65 @@ interface props {
     }
 }
 
-const getJadwal = async (
-    departured_location: string,
-    arrived_location: string
-): Promise<ScheduleTypes[]> => {
-    try {
-        const cookie = await getServerCookie('token')
-        if (!departured_location || !arrived_location) return [];
-        
-        const response: any = await axiosInstance.get(`/schedule?departured_location=${departured_location}&arrived_location=${arrived_location}`, {
-            headers: {
-                Authorization: `Bearer ${cookie}`,
-            }
-        })
+const getAllTrain = async (): Promise<{    uuid: string;
+    flightNumber: string;
+    airline: string;
+    origin: string;
+    destination: string;
+    departureTime: Date;
+    arrivalTime: Date;
+    duration: number;
+    aircraftType: string;
+    totalSeats: number;
+    availableSeats: number;
+    price: number;
+    status: string;
+  }[]> => {
+        try {
+            const token = await getServerCookie('token')
 
-        if (!response.data?.success) {
+            const response: any = await axiosInstance.get('/flight', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+
+           
+
+            return response.data
+        } catch (error) {
+            console.log(error);
             return []
         }
-
-        return response.data.data
-    } catch (error) {
-        console.error(error)
-        return []
-    }
 }
 
-const JadwalPage = async (myprops: props) => {
+ const keretaPage = async (myprops: props) => {
     const departured_location = await myprops.searchParams!.departured_location
     const arrived_location = await myprops.searchParams!.arrived_location
+    const dataKereta = await getAllTrain() || [];
 
-    const listJadwal = await getJadwal(departured_location, arrived_location)
+    console.log(dataKereta);
 
     return (
-        <div className="w-full p-3">
-            <div className='bg-blue-600 w-full p-3 rounded-md shadow-md'>
+        <div className="w-full p-5 bg-white ">
+             <div className='bg-blue-600 w-full p-3 rounded-md shadow-md'>
                 <h1 className='text-white text-xl font-bold'>
-                    Pemesanan Tiket Kereta Api
+                    Pemesanan Tket Pesawat
                 </h1>
                 <FilterTicket
                     arrived_location={arrived_location}
                     departured_location={departured_location}
                 />
             </div>
-            {
-                departured_location !== "" && arrived_location !== "" &&
-                <div className='my-3'>
-                    {
-                        listJadwal.length === 0 ? (
-                            <div className='w-full p-3 rounded-md bg-orange-100'>
-                                Maaf, jadwal tidak tersedia
-                            </div>
-                        ) : (
-                            <div>
-                                {listJadwal.map((jadwal, index) => (
-                                    <Schedule item={jadwal} key={index} />
-                                ))}
-                            </div>
-                        )
-                    }
-                </div>
-            }
+            <div className="my-3">
+                {
+                    dataKereta.map((kereta, index) => (
+                        <FlightData item={kereta} key={`kereta-${index}`} />
+                    ))
+                }
+            </div>
         </div>
     )
 }
 
-export default JadwalPage
+export default keretaPage;
